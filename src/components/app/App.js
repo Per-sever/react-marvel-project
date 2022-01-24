@@ -6,7 +6,13 @@ import Spinner from '../spinner/Spinner';
 const Page404 = lazy(() => import('../pages/404'));
 const MainPage = lazy(() => import('../pages/MainPage'));
 const ComicsPage = lazy(() => import('../pages/ComicsPage'));
-const SingleComicPage = lazy(() => import('../pages/SingleComicPage'));
+const SinglePage = lazy(() => import('../pages/SinglePage'));
+const singleComicLayout = lazy(() =>
+  import('../pages/singleComicLayout/SingeComicLayout')
+);
+const singleCharacterLayout = lazy(() =>
+  import('../pages/singleCharacterLayout/SingleCharacterLayout')
+);
 
 const App = () => {
   return (
@@ -18,7 +24,21 @@ const App = () => {
             <Routes>
               <Route path="/react-marvel-project" element={<MainPage />} />
               <Route path="/comics" element={<ComicsPage />} />
-              <Route path="/comics/:comicId" element={<SingleComicPage />} />
+              <Route
+                path="/characters/:id"
+                element={
+                  <SinglePage
+                    Component={singleCharacterLayout}
+                    dataType="character"
+                  />
+                }
+              />
+              <Route
+                path="/comics/:id"
+                element={
+                  <SinglePage Component={singleComicLayout} dataType="comic" />
+                }
+              />
               <Route path="*" element={<Page404 />} />
             </Routes>
           </Suspense>
