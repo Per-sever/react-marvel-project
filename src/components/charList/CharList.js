@@ -30,7 +30,7 @@ const CharList = (props) => {
     }
 
     setCharList((charList) => [...charList, ...newCharList]);
-    setNewItemLoading((newItemLoading) => false);
+    setNewItemLoading(false);
     setOffset((offset) => offset + 9);
     setCharEnded((charEnded) => ended);
   };
@@ -56,11 +56,10 @@ const CharList = (props) => {
       }
 
       return (
-        <CSSTransition timeout={500} classNames="char__item">
+        <CSSTransition key={item.id} timeout={500} classNames="char__item">
           <li
             className="char__item"
             tabIndex={0}
-            key={item.id}
             ref={(el) => (itemsRefs.current[i] = el)}
             onClick={() => {
               props.onCharSelected(item.id);
